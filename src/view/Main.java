@@ -1,12 +1,14 @@
-
 package view;
 
 
-public class Main {
 
+import view.LoginForm;
+import controller.LoginController;
+
+public class Main {
     public static void main(String[] args) {
-        System.out.println("Chạy chương trình");
-        
+        LoginForm loginForm = new LoginForm();
+        new LoginController(loginForm);
+        loginForm.setVisible(true);
     }
-    
 }
