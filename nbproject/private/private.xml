@@ -4,9 +4,8 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Code/Java/fashion_shop/src/view/LoginForm.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/model/User.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/dao/UserDAO.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/controller/UserController.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/view/ProductForm.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/view/AdminMainForm.java</file>
         </group>
     </open-files>
 </project-private>

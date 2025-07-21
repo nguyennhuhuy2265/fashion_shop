@@ -8,12 +8,12 @@ package view;
  *
  * @author Acer
  */
-public class StaffForm extends javax.swing.JPanel {
+public class RevenueForm extends javax.swing.JPanel {
 
     /**
      * Creates new form InvoiceForm
      */
-    public StaffForm() {
+    public RevenueForm() {
         initComponents();
     }
 
@@ -35,16 +35,16 @@ public class StaffForm extends javax.swing.JPanel {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(321, 321, 321)
+                .addGap(401, 401, 401)
                 .addComponent(jLabel1)
-                .addContainerGap(590, Short.MAX_VALUE))
+                .addContainerGap(510, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(180, 180, 180)
+                .addGap(227, 227, 227)
                 .addComponent(jLabel1)
-                .addContainerGap(444, Short.MAX_VALUE))
+                .addContainerGap(397, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

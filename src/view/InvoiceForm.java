@@ -8,12 +8,12 @@ package view;
  *
  * @author Acer
  */
-public class StaffForm extends javax.swing.JPanel {
+public class InvoiceForm extends javax.swing.JPanel {
 
     /**
      * Creates new form InvoiceForm
      */
-    public StaffForm() {
+    public InvoiceForm() {
         initComponents();
     }
 

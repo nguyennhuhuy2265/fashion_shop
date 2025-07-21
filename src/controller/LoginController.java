@@ -3,8 +3,8 @@ package controller;
 import model.User;
 import dao.UserDAO;
 import view.LoginForm;
-import view.StaffForm;
-import view.AdminForm;
+import view.StaffMainForm;
+import view.AdminMainForm;
 
 import java.awt.event.ActionListener;
 
@@ -31,9 +31,9 @@ public class LoginController {
         if (user != null) {
             view.dispose();
             if ("admin".equals(user.getRole())) {
-                new AdminForm().setVisible(true);
+                new AdminMainForm().setVisible(true);
             } else if ("staff".equals(user.getRole())) {
-                new StaffForm().setVisible(true);
+                new StaffMainForm().setVisible(true);
             }
         } else {
             view.showMessage("Tên đăng nhập hoặc mật khẩu không đúng");
