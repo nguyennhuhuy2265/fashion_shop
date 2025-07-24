@@ -2,15 +2,10 @@ package view;
 
 import controller.ProductController;
 import dao.CategoryDAO;
-import dao.ProductDAO;
 import java.awt.event.ItemEvent;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.Product;
 
@@ -47,16 +42,36 @@ public class ProductForm extends javax.swing.JPanel {
 
     // Xử lý các sự kiện nút và combo box
     private void initEventHandlers() {
+        // Tìm kiếm
         searchButton.addActionListener(e -> performSearch());
+
+        // Xóa
         deleteButton.addActionListener(e -> productController.deleteSelectedProduct(productTable));
 
+        //Thêm
+        addButton.addActionListener(e -> {
+            productController.showAddProductDialog();
+            productController.loadProductTable(productTable); // refresh sau khi thêm
+        });
+
+        //Sửa
+        editButton.addActionListener(e -> {
+            int selectedRow = productTable.getSelectedRow();
+            if (selectedRow != -1) {
+                int productId = (int) productTable.getValueAt(selectedRow, 0);
+                productController.showEditProductDialog(productId);
+                productController.loadProductTable(productTable); // refresh lại bảng
+            } else {
+                JOptionPane.showMessageDialog(null, "Vui lòng chọn sản phẩm để sửa.");
+            }
+        });
+
+        // Lọc danh mục
         categoryComboBox.addItemListener(e -> {
             if (e.getStateChange() == ItemEvent.SELECTED) {
                 performSearch(); // Tự động lọc khi chọn danh mục
             }
         });
-
-        // TODO: Gán thêm sự kiện cho addButton, editButton
     }
 
     // Tìm kiếm và lọc sản phẩm
@@ -92,7 +107,6 @@ public class ProductForm extends javax.swing.JPanel {
         jScrollPane1.setViewportView(productTable);
 
         searchButton.setIcon(new javax.swing.ImageIcon("C:\\Code\\Java\\fashion_shop\\src\\assets\\search.png")); // NOI18N
-        searchButton.setText("Tìm");
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -118,7 +132,7 @@ public class ProductForm extends javax.swing.JPanel {
                         .addComponent(searchButton)
                         .addGap(32, 32, 32)
                         .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, Short.MAX_VALUE)
                         .addComponent(addButton)
                         .addGap(18, 18, 18)
                         .addComponent(editButton)

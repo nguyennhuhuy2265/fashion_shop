@@ -6,6 +6,35 @@ import model.Product;
 
 public class ProductDAO {
 
+    public Product getProductById(int id) {
+    String sql = "SELECT p.*, c.name AS category_name FROM products p JOIN categories c ON p.category_id = c.id WHERE p.id = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        ps.setInt(1, id);
+        try (ResultSet rs = ps.executeQuery()) {
+            if (rs.next()) {
+                return new Product(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getString("description"),
+                    rs.getDouble("price"),
+                    rs.getInt("quantity"),
+                    rs.getString("size"),
+                    rs.getString("color"),
+                    rs.getString("material"),
+                    rs.getString("image_url"),
+                    rs.getInt("category_id"),
+                    rs.getString("category_name")
+                );
+            }
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return null;
+}
+
+    
     public List<Product> getAllProducts() {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT p.*, c.name AS categoryName FROM products p JOIN categories c ON p.category_id = c.id";
@@ -23,6 +52,7 @@ public class ProductDAO {
                         rs.getInt("quantity"),
                         rs.getString("size"),
                         rs.getString("color"),
+                         rs.getString("material"),
                         rs.getString("image_url"),
                         rs.getInt("category_id"),
                         rs.getString("categoryName")
@@ -38,7 +68,7 @@ public class ProductDAO {
     }
 
     public boolean insertProduct(Product p) {
-        String sql = "INSERT INTO products (name, description, price, quantity, size, color, image_url, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO products (name, description, price, quantity, size, color, material, image_url, category_id) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -49,8 +79,9 @@ public class ProductDAO {
             ps.setInt(4, p.getQuantity());
             ps.setString(5, p.getSize());
             ps.setString(6, p.getColor());
-            ps.setString(7, p.getImageUrl());
-            ps.setInt(8, p.getCategoryId());
+            ps.setString(7, p.getMaterial());
+            ps.setString(8, p.getImageUrl());
+            ps.setInt(9, p.getCategoryId());
 
             return ps.executeUpdate() > 0;
 
@@ -61,7 +92,7 @@ public class ProductDAO {
     }
 
     public boolean updateProduct(Product p) {
-        String sql = "UPDATE products SET name=?, description=?, price=?, quantity=?, size=?, color=?, image_url=?, category_id=? WHERE id=?";
+        String sql = "UPDATE products SET name=?, description=?, price=?, quantity=?, size=?, color=?, material=?, image_url=?, category_id=? WHERE id=?";
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -72,9 +103,10 @@ public class ProductDAO {
             ps.setInt(4, p.getQuantity());
             ps.setString(5, p.getSize());
             ps.setString(6, p.getColor());
-            ps.setString(7, p.getImageUrl());
-            ps.setInt(8, p.getCategoryId());
-            ps.setInt(9, p.getId());
+            ps.setString(7, p.getMaterial());
+            ps.setString(8, p.getImageUrl());
+            ps.setInt(9, p.getCategoryId());
+            ps.setInt(10, p.getId());
 
             return ps.executeUpdate() > 0;
 
@@ -118,6 +150,7 @@ public class ProductDAO {
                         rs.getInt("quantity"),
                         rs.getString("size"),
                         rs.getString("color"),
+                        rs.getString("material"),
                         rs.getString("image_url"),
                         rs.getInt("category_id"),
                         rs.getString("categoryName")
@@ -159,6 +192,7 @@ public class ProductDAO {
                     rs.getInt("quantity"),
                     rs.getString("size"),
                     rs.getString("color"),
+                    rs.getString("material"),
                     rs.getString("image_url"),
                     rs.getInt("category_id"),
                     rs.getString("categoryName")

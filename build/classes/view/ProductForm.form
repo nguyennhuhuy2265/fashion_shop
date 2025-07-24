@@ -25,7 +25,7 @@
                       <Component id="searchButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       <Component id="categoryComboBox" min="-2" pref="115" max="-2" attributes="0"/>
-                      <EmptySpace pref="152" max="32767" attributes="0"/>
+                      <EmptySpace pref="176" max="32767" attributes="0"/>
                       <Component id="addButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="editButton" min="-2" max="-2" attributes="0"/>
@@ -90,7 +90,6 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="2" name="C:\Code\Java\fashion_shop\src\assets\search.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="T&#xec;m"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JComboBox" name="categoryComboBox">

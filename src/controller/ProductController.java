@@ -1,14 +1,20 @@
 package controller;
 
+import dao.CategoryDAO;
 import dao.ProductDAO;
 import model.Product;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.List;
+import java.util.Map;
+import model.Category;
+import view.AddEditProductForm;
 
 public class ProductController {
+
     private final ProductDAO productDAO = new ProductDAO();
+    private CategoryDAO categoryDAO = new CategoryDAO();
 
     public void loadProductTable(JTable table) {
         List<Product> productList = productDAO.getAllProducts();
@@ -50,10 +56,73 @@ public class ProductController {
                 p.getPrice(),
                 p.getSize(),
                 p.getColor(),
-                p.getDescription(),
+                p.getMaterial(),
                 p.getQuantity(),
                 p.getCategoryName()
             });
         }
     }
+
+    public Product getProductById(int id) {
+        return productDAO.getProductById(id);
+    }
+
+    public void addProduct(Product p) {
+        productDAO.insertProduct(p);
+    }
+
+    public void updateProduct(Product p) {
+        productDAO.updateProduct(p);
+    }
+
+    public void showAddProductDialog() {
+        AddEditProductForm form = new AddEditProductForm(null, true); // true = modal
+
+        form.setSaveListener(e -> {
+            try {
+                Product newProduct = form.getProductInput();
+                productDAO.insertProduct(newProduct);
+                JOptionPane.showMessageDialog(null, "Thêm sản phẩm thành công.");
+                form.dispose();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi khi thêm sản phẩm.");
+            }
+        });
+
+        form.setCancelListener(e -> form.dispose());
+        form.setTitle("Thêm Sản Phẩm");
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);
+    }
+
+    public void showEditProductDialog(int productId) {
+        Product existingProduct = productDAO.getProductById(productId);
+        if (existingProduct == null) {
+            JOptionPane.showMessageDialog(null, "Không tìm thấy sản phẩm.");
+            return;
+        }
+
+        AddEditProductForm form = new AddEditProductForm(null, true);
+        form.setProduct(existingProduct);
+
+        form.setSaveListener(e -> {
+            try {
+                Product updatedProduct = form.getProductInput();
+                updatedProduct.setId(productId); // giữ nguyên id
+                productDAO.updateProduct(updatedProduct);
+                JOptionPane.showMessageDialog(null, "Cập nhật sản phẩm thành công.");
+                form.dispose();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                JOptionPane.showMessageDialog(null, "Lỗi khi cập nhật sản phẩm.");
+            }
+        });
+
+        form.setCancelListener(e -> form.dispose());
+        form.setTitle("Chỉnh Sửa Sản Phẩm");
+        form.setLocationRelativeTo(null);
+        form.setVisible(true);
+    }
+
 }
