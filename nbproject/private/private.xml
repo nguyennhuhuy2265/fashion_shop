@@ -3,9 +3,12 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Code/Java/fashion_shop/src/view/AddEditProductForm.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/controller/ProductController.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/view/ProductForm.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/dao/CustomerDAO.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/model/Customer.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/model/InvoiceItem.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/dao/InvoiceDAO.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/model/Invoice.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/model/Product.java</file>
         </group>
     </open-files>
 </project-private>

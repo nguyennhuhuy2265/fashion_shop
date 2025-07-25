@@ -3,8 +3,8 @@ package controller;
 import model.User;
 import dao.UserDAO;
 import view.LoginForm;
-import view.StaffMainForm;
-import view.AdminMainForm;
+import view.staff.StaffMainForm;
+import view.admin.AdminMainForm;
 
 import java.awt.event.ActionListener;
 

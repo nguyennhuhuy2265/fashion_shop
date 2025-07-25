@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.Map;
 import model.Category;
-import view.AddEditProductForm;
+import view.admin.AddEditProductForm;
 
 public class ProductController {
 
