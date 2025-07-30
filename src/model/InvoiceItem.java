@@ -1,42 +1,73 @@
 package model;
 
-import java.math.BigDecimal;
-
 public class InvoiceItem {
     private int id;
     private int invoiceId;
     private int productId;
     private int quantity;
-    private BigDecimal unitPrice;
-    private BigDecimal totalPrice;
+    private double unitPrice;
+    private double totalPrice;
 
+    // Constructors
     public InvoiceItem() {}
 
-    public InvoiceItem(int id, int invoiceId, int productId, int quantity, BigDecimal unitPrice, BigDecimal totalPrice) {
-        this.id = id;
+    public InvoiceItem(int invoiceId, int productId, int quantity, double unitPrice) {
         this.invoiceId = invoiceId;
         this.productId = productId;
         this.quantity = quantity;
         this.unitPrice = unitPrice;
-        this.totalPrice = totalPrice;
+        this.totalPrice = quantity * unitPrice;
     }
 
     // Getters and setters
-    public int getId() { return id; }
-    public void setId(int id) { this.id = id; }
+    public int getId() {
+        return id;
+    }
 
-    public int getInvoiceId() { return invoiceId; }
-    public void setInvoiceId(int invoiceId) { this.invoiceId = invoiceId; }
+    public void setId(int id) {
+        this.id = id;
+    }
 
-    public int getProductId() { return productId; }
-    public void setProductId(int productId) { this.productId = productId; }
+    public int getInvoiceId() {
+        return invoiceId;
+    }
 
-    public int getQuantity() { return quantity; }
-    public void setQuantity(int quantity) { this.quantity = quantity; }
+    public void setInvoiceId(int invoiceId) {
+        this.invoiceId = invoiceId;
+    }
 
-    public BigDecimal getUnitPrice() { return unitPrice; }
-    public void setUnitPrice(BigDecimal unitPrice) { this.unitPrice = unitPrice; }
+    public int getProductId() {
+        return productId;
+    }
 
-    public BigDecimal getTotalPrice() { return totalPrice; }
-    public void setTotalPrice(BigDecimal totalPrice) { this.totalPrice = totalPrice; }
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+        this.totalPrice = this.unitPrice * quantity; // Tính lại khi thay đổi
+    }
+
+    public double getUnitPrice() {
+        return unitPrice;
+    }
+
+    public void setUnitPrice(double unitPrice) {
+        this.unitPrice = unitPrice;
+    }
+
+   
+
+    public double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 }
