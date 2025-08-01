@@ -8,7 +8,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
-public class AddEditProductForm extends javax.swing.JDialog {
+public class EditProductDialog extends javax.swing.JDialog {
 
     private ActionListener saveListener;
     private ActionListener cancelListener;
@@ -23,7 +23,7 @@ public class AddEditProductForm extends javax.swing.JDialog {
         this.cancelListener = listener;
     }
 
-    public AddEditProductForm(java.awt.Frame parent, boolean modal) {
+    public EditProductDialog(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         setSize(430, 420);

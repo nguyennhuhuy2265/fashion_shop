@@ -7,15 +7,23 @@ public class StaffMainForm extends javax.swing.JFrame {
 
     public StaffMainForm() {
         initComponents();
-        setSize(1160, 680);
         contentPanelStaff.add(new SellForm(), "sell");
-        
+         contentPanelStaff.add(new CustomerForm(), "customer");
 
         CardLayout layout = (CardLayout) contentPanelStaff.getLayout();
 
-        sellButton.addActionListener(e -> layout.show(contentPanelStaff, "sell"));
-
-
+        sellButton.addActionListener(e -> {
+            layout.show(contentPanelStaff, "sell");
+            contentPanelStaff.revalidate();
+            contentPanelStaff.repaint();
+            pack();
+        });
+        customerButton.addActionListener(e -> {
+            layout.show(contentPanelStaff, "customer");
+            contentPanelStaff.revalidate();
+            contentPanelStaff.repaint();
+            pack();
+        });
 
         logOutButton.addActionListener(e -> {
             // Hiện form đăng nhập
@@ -105,7 +113,7 @@ public class StaffMainForm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(menuPanelaAdmin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(contentPanelStaff, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(contentPanelStaff, javax.swing.GroupLayout.DEFAULT_SIZE, 789, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(

@@ -9,7 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import java.util.List;
 import java.util.Map;
 import model.Category;
-import view.admin.AddEditProductForm;
+import view.admin.EditProductDialog;
 
 public class ProductController {
 
@@ -76,7 +76,7 @@ public class ProductController {
     }
 
     public void showAddProductDialog() {
-        AddEditProductForm form = new AddEditProductForm(null, true); // true = modal
+        EditProductDialog form = new EditProductDialog(null, true); // true = modal
 
         form.setSaveListener(e -> {
             try {
@@ -103,7 +103,7 @@ public class ProductController {
             return;
         }
 
-        AddEditProductForm form = new AddEditProductForm(null, true);
+        EditProductDialog form = new EditProductDialog(null, true);
         form.setProduct(existingProduct);
 
         form.setSaveListener(e -> {

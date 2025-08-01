@@ -5,6 +5,7 @@ import dao.InvoiceDAO;
 import dao.InvoiceItemDAO;
 import dao.ProductDAO;
 import dao.UserDAO;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -272,7 +273,7 @@ public class SellForm extends javax.swing.JPanel {
         paidAmountTextField = new javax.swing.JTextField();
         deleteButton = new javax.swing.JButton();
 
-        setPreferredSize(new java.awt.Dimension(949, 680));
+        setPreferredSize(new java.awt.Dimension(1090, 670));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -355,7 +356,7 @@ public class SellForm extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 763, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(changeAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -369,20 +370,20 @@ public class SellForm extends javax.swing.JPanel {
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addComponent(customersListComboBox, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(addCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(addCustomerButton, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(totalAmountTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel3))
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 19, Short.MAX_VALUE)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(jLabel7)
                                                 .addGap(54, 54, 54))
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGap(18, 18, 18)
-                                                .addComponent(paidAmountTextField)))))))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                                                .addComponent(paidAmountTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))))))
+                        .addGap(13, 13, 13))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

@@ -9,7 +9,7 @@ public class AdminMainForm extends javax.swing.JFrame {
 
     public AdminMainForm() {
         initComponents();
-        setSize(1160, 680);
+        setSize(1300, 700);
         contentPanelAdmin.add(new ProductForm(), "product");
         contentPanelAdmin.add(new InvoiceForm(), "invoice");
         contentPanelAdmin.add(new CustomerForm(), "customer");

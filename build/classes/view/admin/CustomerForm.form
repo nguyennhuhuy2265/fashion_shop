@@ -17,10 +17,9 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="jScrollPane1" min="-2" pref="559" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="searchTextField" min="-2" pref="240" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="searchButton" min="-2" max="-2" attributes="0"/>
@@ -29,6 +28,7 @@
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Component id="deleteButton" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Component id="jScrollPane1" min="-2" pref="614" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
@@ -44,7 +44,7 @@
           <Group type="102" alignment="1" attributes="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
-                      <EmptySpace min="0" pref="35" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="searchTextField" min="-2" pref="23" max="-2" attributes="0"/>
                           <Component id="searchButton" alignment="0" min="-2" pref="23" max="-2" attributes="0"/>
@@ -63,7 +63,7 @@
               </Group>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="0"/>
-                  <Component id="jScrollPane1" pref="527" max="32767" attributes="0"/>
+                  <Component id="jScrollPane1" pref="532" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -124,24 +124,25 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="103" alignment="0" groupAlignment="1" attributes="0">
+                  <EmptySpace pref="33" max="32767" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Group type="102" attributes="0">
+                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" max="-2" attributes="0"/>
+                          <Component id="pointLabel" min="-2" pref="131" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="updateButton" min="-2" pref="99" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="phoneTextField" alignment="0" min="-2" pref="319" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="pointLabel" min="-2" pref="131" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
                       </Group>
-                      <Component id="jLabel3" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
-                      <Component id="nameTextField" alignment="0" min="-2" pref="319" max="-2" attributes="0"/>
-                      <Component id="jLabel2" alignment="0" min="-2" pref="181" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="jLabel3" min="-2" pref="181" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" pref="181" max="-2" attributes="0"/>
+                              <Component id="nameTextField" min="-2" pref="319" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="phoneTextField" alignment="1" min="-2" pref="319" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
-                  <EmptySpace pref="34" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -160,9 +161,8 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="pointLabel" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="updateButton" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Component id="updateButton" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
