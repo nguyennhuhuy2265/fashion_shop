@@ -135,4 +135,30 @@ public class CustomerDAO {
         return false;
     }
 
+    public String getCustomerNameById(int id) {
+    String sql = "SELECT name FROM customers WHERE id = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) return rs.getString("name");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return "";
+}
+
+public String getCustomerPhoneById(int id) {
+    String sql = "SELECT phone FROM customers WHERE id = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) return rs.getString("phone");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return "";
+}
+
 }

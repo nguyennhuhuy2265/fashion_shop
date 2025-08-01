@@ -126,12 +126,22 @@ public class SellForm extends javax.swing.JPanel {
             // 5. Lưu vào DB
             InvoiceDAO invoiceDAO = new InvoiceDAO();
             int invoiceId = invoiceDAO.insertInvoice(invoice);
+            // 6. Cộng điểm thưởng cho khách
             if (invoiceId > 0) {
                 for (InvoiceItem item : items) {
                     item.setInvoiceId(invoiceId);
                 }
                 InvoiceItemDAO invoiceItemDAO = new InvoiceItemDAO();
                 invoiceItemDAO.insertInvoiceItems(items);
+
+                // Tính điểm: mỗi 100.000 VND = +1 điểm
+                int addedPoints = (int) (invoice.getTotalAmount() / 100000);
+
+                // Không reset điểm sau khi dùng, chỉ cộng thêm
+                int newPointBalance = selectedCustomer.getPoints() + addedPoints;
+
+                selectedCustomer.setPoints(newPointBalance);
+                new CustomerDAO().updateCustomerPoints(selectedCustomer.getId(), newPointBalance);
 
                 JOptionPane.showMessageDialog(this, "Tạo hoá đơn thành công.");
                 clearForm();
@@ -206,8 +216,24 @@ public class SellForm extends javax.swing.JPanel {
         if (pointCheckBox.isSelected()) {
             Customer selectedCustomer = (Customer) customersListComboBox.getSelectedItem();
             if (selectedCustomer != null) {
-                int points = selectedCustomer.getPoints();   // Giả sử 1 điểm = 100 VNĐ
-                total = Math.max(0, total - points * 100);
+                int points = selectedCustomer.getPoints();
+
+                // Xác định % giảm theo điểm
+                int discountPercent = 0;
+                if (points >= 50) {
+                    discountPercent = 15;
+                } else if (points >= 30) {
+                    discountPercent = 10;
+                } else if (points >= 20) {
+                    discountPercent = 7;
+                } else if (points >= 10) {
+                    discountPercent = 5;
+                } else if (points > 0) {
+                    discountPercent = 2;
+                }
+
+                double discountAmount = total * discountPercent / 100.0;
+                total = total - discountAmount;
             }
         }
 

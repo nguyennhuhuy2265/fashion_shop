@@ -9,6 +9,7 @@ public class StaffMainForm extends javax.swing.JFrame {
         initComponents();
         contentPanelStaff.add(new SellForm(), "sell");
          contentPanelStaff.add(new CustomerForm(), "customer");
+         contentPanelStaff.add(new InvoiceForm(), "invoice");
 
         CardLayout layout = (CardLayout) contentPanelStaff.getLayout();
 
@@ -20,6 +21,12 @@ public class StaffMainForm extends javax.swing.JFrame {
         });
         customerButton.addActionListener(e -> {
             layout.show(contentPanelStaff, "customer");
+            contentPanelStaff.revalidate();
+            contentPanelStaff.repaint();
+            pack();
+        });
+        invoiceButton.addActionListener(e -> {
+            layout.show(contentPanelStaff, "invoice");
             contentPanelStaff.revalidate();
             contentPanelStaff.repaint();
             pack();

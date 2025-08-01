@@ -172,5 +172,17 @@ public class UserDAO {
         }
         return userList;
     }
+public String getUserFullName(int id) {
+    String sql = "SELECT fullname FROM users WHERE id = ?";
+    try (Connection conn = DBConnection.getConnection();
+         PreparedStatement stmt = conn.prepareStatement(sql)) {
+        stmt.setInt(1, id);
+        ResultSet rs = stmt.executeQuery();
+        if (rs.next()) return rs.getString("fullname");
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return "";
+}
 
 }

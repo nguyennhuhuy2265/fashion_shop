@@ -191,7 +191,7 @@ public class CustomerForm extends javax.swing.JPanel {
         updateButton.setText("Cập nhật");
 
         pointLabel.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        pointLabel.setText("100");
+        pointLabel.setText("0");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

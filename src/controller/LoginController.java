@@ -4,8 +4,6 @@ import model.User;
 import dao.UserDAO;
 import view.LoginForm;
 import view.admin.AdminMainForm;
-
-import java.awt.event.ActionListener;
 import view.staff.StaffMainForm;
 
 public class LoginController {
