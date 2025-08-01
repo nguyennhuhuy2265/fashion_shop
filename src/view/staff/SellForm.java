@@ -4,10 +4,13 @@ import dao.CustomerDAO;
 import dao.InvoiceDAO;
 import dao.InvoiceItemDAO;
 import dao.ProductDAO;
+import dao.UserDAO;
+import java.awt.Frame;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import model.Customer;
 import model.Invoice;
@@ -17,11 +20,10 @@ import model.User;
 
 public class SellForm extends javax.swing.JPanel {
 
-    private User currentUser;
+    User current = UserDAO.getCurrentUser();
 
     public SellForm() {
         initComponents();
-        this.currentUser = currentUser;
         setupEventHandlers();
         loadCustomers();
 
@@ -41,6 +43,19 @@ public class SellForm extends javax.swing.JPanel {
         });
         pointCheckBox.addActionListener(e -> updateTotalAmount());
         paidAmountTextField.addActionListener(e -> updateChangeAmount());
+        paidAmountTextField.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                updateChangeAmount();
+            }
+        });
+        addCustomerButton.addActionListener(e -> {
+            EditCustomerDialog dialog = new EditCustomerDialog((Frame) SwingUtilities.getWindowAncestor(this), null);
+            dialog.setVisible(true);
+            if (dialog.isSaved()) {
+                loadCustomers(); // Tải lại danh sách nếu đã thêm mới
+            }
+        });
+
         submitButton.addActionListener(e -> saveInvoice());
         deleteButton.addActionListener(e -> {
             int selectedRow = productSellTable.getSelectedRow();
@@ -86,9 +101,12 @@ public class SellForm extends javax.swing.JPanel {
                 items.add(item);
             }
 
+            int point = selectedCustomer.getPoints();
             // 3. Tính tiền thanh toán
             if (pointCheckBox.isSelected()) {
-                total = Math.max(0, total - 10000); // Trừ điểm giả định
+                total = Math.max(0, total - point * 100); // Trừ điểm giả định
+                selectedCustomer.setPoints(0);
+                new CustomerDAO().updateCustomerPoints(selectedCustomer.getId(), 0);
             }
 
             double paid = Double.parseDouble(paidAmountTextField.getText().trim());
@@ -97,7 +115,7 @@ public class SellForm extends javax.swing.JPanel {
             // 4. Tạo hoá đơn
             Invoice invoice = new Invoice();
             invoice.setCustomerId(selectedCustomer.getId());
-            invoice.setUserId(currentUser.getId());
+            invoice.setUserId(current.getId());
             invoice.setTotalAmount(total);
             invoice.setPaidAmount(paid);
             invoice.setChangeAmount(change > 0 ? change : 0);
@@ -142,7 +160,7 @@ public class SellForm extends javax.swing.JPanel {
         List<Customer> customers = customerDAO.getAllCustomers();
         customersListComboBox.removeAllItems();
         for (Customer c : customers) {
-            customersListComboBox.addItem(c.toString());  
+            customersListComboBox.addItem(c);
         }
     }
 
@@ -168,6 +186,7 @@ public class SellForm extends javax.swing.JPanel {
 
             model.addRow(rowData);
             updateTotalAmount(); // Tự tính lại tổng tiền
+            quantityTextField.setText("");  // Reset ô nhập số lượng
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
@@ -183,9 +202,12 @@ public class SellForm extends javax.swing.JPanel {
             total += price * quantity;
         }
 
-        // Giả sử điểm tích lũy = 10000đ nếu chọn
         if (pointCheckBox.isSelected()) {
-            total = Math.max(0, total - 10000);
+            Customer selectedCustomer = (Customer) customersListComboBox.getSelectedItem();
+            if (selectedCustomer != null) {
+                int points = selectedCustomer.getPoints();   // Giả sử 1 điểm = 100 VNĐ
+                total = Math.max(0, total - points * 100);
+            }
         }
 
         totalAmountTextField.setText(String.valueOf(total));
@@ -418,7 +440,7 @@ public class SellForm extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addCustomerButton;
     private javax.swing.JTextField changeAmountTextField;
-    private javax.swing.JComboBox<String> customersListComboBox;
+    private javax.swing.JComboBox<Customer> customersListComboBox;
     private javax.swing.JButton deleteButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

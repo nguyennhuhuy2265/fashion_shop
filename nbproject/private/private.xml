@@ -3,16 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Code/Java/fashion_shop/src/view/staff/EditCustomerDialog.java</file>
             <file>file:/C:/Code/Java/fashion_shop/src/dao/CustomerDAO.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/model/Customer.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/model/InvoiceItem.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/dao/InvoiceDAO.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/dao/InvoiceItemDAO.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/view/staff/StaffMainForm.java</file>
             <file>file:/C:/Code/Java/fashion_shop/src/controller/LoginController.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/dao/ProductDAO.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/view/admin/ProductForm.java</file>
-            <file>file:/C:/Code/Java/fashion_shop/src/dao/UserDAO.java</file>
             <file>file:/C:/Code/Java/fashion_shop/src/view/staff/SellForm.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/dao/UserDAO.java</file>
+            <file>file:/C:/Code/Java/fashion_shop/src/controller/UserController.java</file>
         </group>
     </open-files>
 </project-private>

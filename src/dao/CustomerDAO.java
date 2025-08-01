@@ -11,10 +11,8 @@ public class CustomerDAO {
         List<Customer> customers = new ArrayList<>();
         String query = "SELECT * FROM customers";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query);
-             ResultSet rs = stmt.executeQuery()) {
-            
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query); ResultSet rs = stmt.executeQuery()) {
+
             while (rs.next()) {
                 Customer customer = new Customer();
                 customer.setId(rs.getInt("id"));
@@ -31,9 +29,8 @@ public class CustomerDAO {
 
     public boolean insertCustomer(Customer customer) {
         String query = "INSERT INTO customers (name, phone, points) VALUES (?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
             stmt.setString(1, customer.getName());
             stmt.setString(2, customer.getPhone());
             stmt.setInt(3, customer.getPoints());
@@ -48,8 +45,7 @@ public class CustomerDAO {
 
     public boolean updateCustomer(Customer customer) {
         String query = "UPDATE customers SET name = ?, phone = ?, points = ? WHERE id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setString(1, customer.getName());
             stmt.setString(2, customer.getPhone());
@@ -66,8 +62,7 @@ public class CustomerDAO {
 
     public boolean deleteCustomer(int id) {
         String query = "DELETE FROM customers WHERE id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             stmt.setInt(1, id);
             return stmt.executeUpdate() > 0;
@@ -82,8 +77,7 @@ public class CustomerDAO {
         List<Customer> customers = new ArrayList<>();
         String query = "SELECT * FROM customers WHERE name LIKE ? OR phone LIKE ?";
 
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
 
             String likeKeyword = "%" + keyword + "%";
             stmt.setString(1, likeKeyword);
@@ -109,9 +103,8 @@ public class CustomerDAO {
 
     public Customer getCustomerById(int id) {
         String query = "SELECT * FROM customers WHERE id = ?";
-        try (Connection conn = DBConnection.getConnection();
-             PreparedStatement stmt = conn.prepareStatement(query)) {
-            
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(query)) {
+
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
 
@@ -129,4 +122,17 @@ public class CustomerDAO {
         }
         return null;
     }
+
+    public boolean updateCustomerPoints(int customerId, int newPoints) {
+        String sql = "UPDATE customers SET points = ? WHERE id = ?";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, newPoints);
+            stmt.setInt(2, customerId);
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 }

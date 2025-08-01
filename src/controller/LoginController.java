@@ -30,10 +30,12 @@ public class LoginController {
         User user = userDAO.findByUsernameAndPassword(username, password);
         if (user != null) {
             view.dispose();
+            userDAO.setCurrentUser(user);  // Lưu lại user hiện tại
             if ("admin".equals(user.getRole())) {
                 new AdminMainForm().setVisible(true);
             } else if ("staff".equals(user.getRole())) {
                 new StaffMainForm().setVisible(true);
+                
             }
         } else {
             view.showMessage("Tên đăng nhập hoặc mật khẩu không đúng");
