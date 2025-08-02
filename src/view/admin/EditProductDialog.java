@@ -63,7 +63,7 @@ public class EditProductDialog extends javax.swing.JDialog {
     public void setProduct(Product product) {
         nameTextField.setText(product.getName());
         priceTextField.setText(String.valueOf(product.getPrice()));
-        quantityTextField.setText(String.valueOf(product.getQuantity()));
+//        quantityTextField.setText(String.valueOf(product.getQuantity()));
         sizeTextField.setText(product.getSize());
         colorTextField.setText(product.getColor());
         materialTextField.setText(product.getMaterial());
@@ -86,7 +86,7 @@ public class EditProductDialog extends javax.swing.JDialog {
         Product product = new Product();
         product.setName(nameTextField.getText().trim());
         product.setPrice(Double.parseDouble(priceTextField.getText().trim()));
-        product.setQuantity(Integer.parseInt(quantityTextField.getText().trim()));
+        product.setQuantity(0);
         product.setSize(sizeTextField.getText().trim());
         product.setColor(colorTextField.getText().trim());
         product.setMaterial(materialTextField.getText().trim());
@@ -140,9 +140,7 @@ public class EditProductDialog extends javax.swing.JDialog {
         sizeTextField = new javax.swing.JTextField();
         colorTextField = new javax.swing.JTextField();
         materialTextField = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
         categoryComboBox = new javax.swing.JComboBox<>();
-        quantityTextField = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         saveButton = new javax.swing.JButton();
         cancelButton = new javax.swing.JButton();
@@ -167,8 +165,6 @@ public class EditProductDialog extends javax.swing.JDialog {
         jLabel5.setText("Màu");
 
         jLabel6.setText("Chất liệu");
-
-        jLabel7.setText("Số lượng");
 
         categoryComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -210,16 +206,12 @@ public class EditProductDialog extends javax.swing.JDialog {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel3)
-                        .addGap(105, 105, 105)
-                        .addComponent(jLabel7)
-                        .addGap(86, 86, 86)
+                        .addGap(239, 239, 239)
                         .addComponent(jLabel6))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(33, 33, 33)
+                        .addGap(159, 159, 159)
                         .addComponent(materialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
@@ -267,12 +259,10 @@ public class EditProductDialog extends javax.swing.JDialog {
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
-                    .addComponent(jLabel7)
                     .addComponent(jLabel6))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(categoryComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(quantityTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(materialTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(23, 23, 23)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -296,13 +286,11 @@ public class EditProductDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextField materialTextField;
     private javax.swing.JTextField nameTextField;
     private javax.swing.JTextField priceTextField;
-    private javax.swing.JTextField quantityTextField;
     private javax.swing.JButton saveButton;
     private javax.swing.JTextField sizeTextField;
     // End of variables declaration//GEN-END:variables
