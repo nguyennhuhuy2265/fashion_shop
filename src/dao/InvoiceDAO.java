@@ -138,4 +138,25 @@ public class InvoiceDAO {
         return invoice;
     }
 
+    public List<Invoice> getInvoicesByUserId(int userId) {
+        List<Invoice> list = new ArrayList<>();
+        String sql = "SELECT * FROM invoices WHERE user_id = ? ORDER BY created_at DESC";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setInt(1, userId);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Invoice invoice = extractInvoiceFromResultSet(rs);
+                list.add(invoice);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
 }

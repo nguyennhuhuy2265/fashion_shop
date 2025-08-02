@@ -10,8 +10,19 @@ public class AdminMainForm extends javax.swing.JFrame {
     public AdminMainForm() {
         initComponents();
         setSize(1300, 700);
+
+        // Tạo menu popup
+        javax.swing.JPopupMenu invoiceMenu = new javax.swing.JPopupMenu();
+        javax.swing.JMenuItem viewInvoice = new javax.swing.JMenuItem("Hóa đơn bán hàng");
+        javax.swing.JMenuItem viewImportReceipt = new javax.swing.JMenuItem("Phiếu nhập hàng");
+
+        invoiceMenu.add(viewInvoice);
+        invoiceMenu.add(viewImportReceipt);
+
+        // Thêm các panel vào contentPanelAdmin
         contentPanelAdmin.add(new ProductForm(), "product");
         contentPanelAdmin.add(new InvoiceForm(), "invoice");
+        contentPanelAdmin.add(new ImportReceipt(), "import_receipt");
         contentPanelAdmin.add(new CustomerForm(), "customer");
         contentPanelAdmin.add(new ImportForm(), "import");
         contentPanelAdmin.add(new RevenueForm(), "revenue");
@@ -19,18 +30,24 @@ public class AdminMainForm extends javax.swing.JFrame {
 
         CardLayout layout = (CardLayout) contentPanelAdmin.getLayout();
 
+        // Gắn sự kiện cho các JMenuItem
+        viewInvoice.addActionListener(e -> layout.show(contentPanelAdmin, "invoice"));
+        viewImportReceipt.addActionListener(e -> layout.show(contentPanelAdmin, "import_receipt"));
+
+        // Gắn sự kiện duy nhất cho nút invoiceButton để hiện menu
+        invoiceButton.addActionListener(e -> {
+            invoiceMenu.show(invoiceButton, 0, invoiceButton.getHeight());
+        });
+
+        // Các nút khác
         productButton.addActionListener(e -> layout.show(contentPanelAdmin, "product"));
-        invoiceButton.addActionListener(e -> layout.show(contentPanelAdmin, "invoice"));
         customerButton.addActionListener(e -> layout.show(contentPanelAdmin, "customer"));
         importButton.addActionListener(e -> layout.show(contentPanelAdmin, "import"));
         revenueButton.addActionListener(e -> layout.show(contentPanelAdmin, "revenue"));
         staffButton.addActionListener(e -> layout.show(contentPanelAdmin, "staff"));
 
         logOutButton.addActionListener(e -> {
-            // Hiện form đăng nhập
             new LoginForm().setVisible(true);
-
-            // Đóng cửa sổ hiện tại
             dispose();
         });
     }
