@@ -2,6 +2,7 @@ package dao;
 
 import model.ImportReceipt;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -72,20 +73,99 @@ public class ImportReceiptDAO {
         return null;
     }
 
-    public String getSupplierNameById(int id) {
-        String sql = "SELECT name FROM suppliers WHERE id = ?";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+    public List<ImportReceipt> getReceiptsBySupplierId(int supplierId) {
+        List<ImportReceipt> list = new ArrayList<>();
+        String sql = "SELECT * FROM import_receipts WHERE supplier_id = ? ORDER BY created_at DESC";
 
-            stmt.setInt(1, id);
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, supplierId);
             try (ResultSet rs = stmt.executeQuery()) {
-                if (rs.next()) {
-                    return rs.getString("name");
+                while (rs.next()) {
+                    ImportReceipt r = new ImportReceipt();
+                    r.setId(rs.getInt("id"));
+                    r.setSupplierId(rs.getInt("supplier_id"));
+                    r.setUserId(rs.getInt("user_id"));
+                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    list.add(r);
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return null;
+
+        return list;
+    }
+
+    public List<ImportReceipt> searchImportReceiptsById(String keyword) {
+        List<ImportReceipt> list = new ArrayList<>();
+        String sql = "SELECT * FROM import_receipts WHERE CAST(id AS CHAR) LIKE ? ORDER BY created_at DESC";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keyword + "%");
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    ImportReceipt r = new ImportReceipt();
+                    r.setId(rs.getInt("id"));
+                    r.setSupplierId(rs.getInt("supplier_id"));
+                    r.setUserId(rs.getInt("user_id"));
+                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    list.add(r);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<ImportReceipt> getImportReceiptsByDateRange(LocalDateTime from, LocalDateTime to) {
+        List<ImportReceipt> list = new ArrayList<>();
+        String sql = "SELECT * FROM import_receipts WHERE created_at BETWEEN ? AND ? ORDER BY created_at DESC";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setTimestamp(1, Timestamp.valueOf(from));
+            stmt.setTimestamp(2, Timestamp.valueOf(to));
+
+            try (ResultSet rs = stmt.executeQuery()) {
+                while (rs.next()) {
+                    ImportReceipt r = new ImportReceipt();
+                    r.setId(rs.getInt("id"));
+                    r.setSupplierId(rs.getInt("supplier_id"));
+                    r.setUserId(rs.getInt("user_id"));
+                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                    list.add(r);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
+
+    public List<ImportReceipt> getImportReceiptsToday() {
+        List<ImportReceipt> list = new ArrayList<>();
+        String sql = "SELECT * FROM import_receipts WHERE DATE(created_at) = CURDATE() ORDER BY created_at DESC";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                ImportReceipt r = new ImportReceipt();
+                r.setId(rs.getInt("id"));
+                r.setSupplierId(rs.getInt("supplier_id"));
+                r.setUserId(rs.getInt("user_id"));
+                r.setTotalAmount(rs.getDouble("total_amount"));
+                r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
+                list.add(r);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
     }
 
 }

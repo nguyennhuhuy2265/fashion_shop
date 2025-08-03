@@ -22,7 +22,7 @@ public class AdminMainForm extends javax.swing.JFrame {
         // Thêm các panel vào contentPanelAdmin
         contentPanelAdmin.add(new ProductForm(), "product");
         contentPanelAdmin.add(new InvoiceForm(), "invoice");
-        contentPanelAdmin.add(new ImportReceipt(), "import_receipt");
+        contentPanelAdmin.add(new ImportReceiptForm(), "import_receipt");
         contentPanelAdmin.add(new CustomerForm(), "customer");
         contentPanelAdmin.add(new ImportForm(), "import");
         contentPanelAdmin.add(new RevenueForm(), "revenue");
