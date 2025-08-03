@@ -55,11 +55,12 @@ public class StaffMainForm extends javax.swing.JFrame {
         contentPanelStaff = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setPreferredSize(new java.awt.Dimension(1315, 695));
 
         menuPanelaAdmin.setBackground(new java.awt.Color(153, 153, 255));
 
         sellButton.setIcon(new javax.swing.ImageIcon("C:\\Code\\Java\\fashion_shop\\src\\assets\\fashion.png")); // NOI18N
-        sellButton.setText("Sản phẩm");
+        sellButton.setText("Bán hàng");
 
         invoiceButton.setIcon(new javax.swing.ImageIcon("C:\\Code\\Java\\fashion_shop\\src\\assets\\invoice.png")); // NOI18N
         invoiceButton.setText("Hoá đơn");
