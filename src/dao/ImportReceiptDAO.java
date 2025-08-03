@@ -167,5 +167,28 @@ public class ImportReceiptDAO {
 
         return list;
     }
+    // Hàm mới để lấy tổng chi theo năm
+
+    public List<Object[]> getExpensesByYear(int year) {
+        List<Object[]> list = new ArrayList<>();
+        String sql = "SELECT MONTH(ir.created_at) AS month, SUM(ir.total_amount) AS total_expense "
+                + "FROM import_receipts ir "
+                + "WHERE YEAR(ir.created_at) = ? "
+                + "GROUP BY MONTH(ir.created_at) "
+                + "ORDER BY month";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, year);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Object[] row = new Object[2];
+                row[0] = rs.getInt("month"); // Tháng
+                row[1] = rs.getDouble("total_expense"); // Tổng chi
+                list.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 
 }

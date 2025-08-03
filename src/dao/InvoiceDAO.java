@@ -158,5 +158,29 @@ public class InvoiceDAO {
 
         return list;
     }
+// Hàm mới để lấy dữ liệu thống kê doanh thu theo năm
 
+    public List<Object[]> getRevenueByYear(int year) {
+        List<Object[]> list = new ArrayList<>();
+        String sql = "SELECT MONTH(i.created_at) AS month, SUM(ii.quantity) AS total_quantity, SUM(i.total_amount) AS total_revenue "
+                + "FROM invoices i "
+                + "JOIN invoice_items ii ON i.id = ii.invoice_id "
+                + "WHERE YEAR(i.created_at) = ? "
+                + "GROUP BY MONTH(i.created_at) "
+                + "ORDER BY month";
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setInt(1, year);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Object[] row = new Object[3];
+                row[0] = rs.getInt("month"); // Tháng
+                row[1] = rs.getInt("total_quantity"); // Số lượng sản phẩm
+                row[2] = rs.getDouble("total_revenue"); // Tổng thu
+                list.add(row);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
 }
