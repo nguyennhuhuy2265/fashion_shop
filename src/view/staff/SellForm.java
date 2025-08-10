@@ -133,7 +133,17 @@ public class SellForm extends javax.swing.JPanel {
                 }
                 InvoiceItemDAO invoiceItemDAO = new InvoiceItemDAO();
                 invoiceItemDAO.insertInvoiceItems(items);
+                // --- Thêm đoạn này để trừ số lượng sản phẩm trong kho ---
+                ProductDAO productDAO = new ProductDAO();
+                for (InvoiceItem item : items) {
+                    boolean updated = productDAO.decreaseQuantityById(item.getProductId(), item.getQuantity());
+                    if (!updated) {
+                        System.err.println("Không thể cập nhật số lượng cho sản phẩm ID: " + item.getProductId());
+                    }
+                }
 
+                // Load lại sản phẩm mới nhất từ DB và cập nhật bảng
+                loadProductTable(productDAO.getAllProducts());
                 // Tính điểm: mỗi 100.000 VND = +1 điểm
                 int addedPoints = (int) (invoice.getTotalAmount() / 100000);
 

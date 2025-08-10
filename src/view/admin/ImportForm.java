@@ -61,10 +61,11 @@ public class ImportForm extends javax.swing.JPanel {
                 String material = (String) sourceModel.getValueAt(selectedRow, 4);
 
                 int quantity = Integer.parseInt(quantityTextField.getText().trim());
-                double importPrice = Double.parseDouble(importPriceTextField.getText().trim());
+                int importPrice = Integer.parseInt(importPriceTextField.getText().trim());
 
                 DefaultTableModel tempModel = (DefaultTableModel) productTable1.getModel();
                 tempModel.addRow(new Object[]{productId, productName, size, color, material, importPrice, quantity});
+                updateTotalPrice();  // Cập nhật tổng tiền sau khi thêm
                 clearInputFields(); // xóa dữ liệu nhập sau khi thêm
             } catch (Exception ex) {
                 showMessage("Vui lòng nhập đúng số lượng và giá nhập.");
@@ -76,6 +77,7 @@ public class ImportForm extends javax.swing.JPanel {
             if (selectedRow != -1) {
                 DefaultTableModel tempModel = (DefaultTableModel) productTable1.getModel();
                 tempModel.removeRow(selectedRow);
+                updateTotalPrice();  // Cập nhật tổng tiền sau khi thêm
                 clearInputFields(); // xóa dữ liệu nhập sau khi thêm
             } else {
                 showMessage("Vui lòng chọn sản phẩm cần xóa khỏi danh sách tạm.");
@@ -106,7 +108,7 @@ public class ImportForm extends javax.swing.JPanel {
                 int totalAmount = 0;
                 for (int i = 0; i < model.getRowCount(); i++) {
                     int quantity = (int) model.getValueAt(i, 6);
-                    double unitPrice = (double) model.getValueAt(i, 5);
+                    int unitPrice = (int) model.getValueAt(i, 5);
                     totalAmount += quantity * unitPrice;
                 }
                 receipt.setTotalAmount(totalAmount);
@@ -195,6 +197,16 @@ public class ImportForm extends javax.swing.JPanel {
             });
         }
     }
+private void updateTotalPrice() {
+    DefaultTableModel tempModel = (DefaultTableModel) productTable1.getModel();
+    int total = 0;
+    for (int i = 0; i < tempModel.getRowCount(); i++) {
+        int price = (int) tempModel.getValueAt(i, 5);     // Giá nhập
+        int quantity = (int) tempModel.getValueAt(i, 6);  // Số lượng nhập
+        total += price * quantity;
+    }
+    totalPriceTextField.setText(String.valueOf(total));
+}
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -220,6 +232,8 @@ public class ImportForm extends javax.swing.JPanel {
         submitButton = new javax.swing.JButton();
         suppliersListComboBox = new javax.swing.JComboBox<>();
         addSupplierButton = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        totalPriceTextField = new javax.swing.JTextField();
 
         setPreferredSize(new java.awt.Dimension(949, 680));
 
@@ -269,6 +283,8 @@ public class ImportForm extends javax.swing.JPanel {
 
         addSupplierButton.setIcon(new javax.swing.ImageIcon("C:\\Code\\Java\\fashion_shop\\src\\assets\\add.png")); // NOI18N
 
+        jLabel5.setText("Tổng tiền");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -296,7 +312,7 @@ public class ImportForm extends javax.swing.JPanel {
                                 .addComponent(saveButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(deleteButton)))
-                        .addGap(0, 381, Short.MAX_VALUE))
+                        .addGap(0, 494, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -309,7 +325,12 @@ public class ImportForm extends javax.swing.JPanel {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(12, 12, 12)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel5)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel6)
@@ -350,7 +371,11 @@ public class ImportForm extends javax.swing.JPanel {
                         .addComponent(jLabel6)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(37, 37, 37)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
                         .addComponent(submitButton))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 31, Short.MAX_VALUE))
@@ -366,6 +391,7 @@ public class ImportForm extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -379,6 +405,7 @@ public class ImportForm extends javax.swing.JPanel {
     private javax.swing.JTextField searchTextField;
     private javax.swing.JButton submitButton;
     private javax.swing.JComboBox<Supplier> suppliersListComboBox;
+    private javax.swing.JTextField totalPriceTextField;
     // End of variables declaration//GEN-END:variables
 
 }

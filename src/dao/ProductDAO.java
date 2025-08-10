@@ -212,5 +212,20 @@ public class ProductDAO {
             return false;
         }
     }
+public boolean decreaseQuantityById(int productId, int quantityToSubtract) {
+        String sql = "UPDATE products SET quantity = GREATEST(quantity - ?, 0) WHERE id = ?";
+
+        try (Connection conn = DBConnection.getConnection(); PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setInt(1, quantityToSubtract);
+            ps.setInt(2, productId);
+
+            return ps.executeUpdate() > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
 
 }
