@@ -103,7 +103,7 @@ public class ImportForm extends javax.swing.JPanel {
                 receipt.setNote(note);
                 receipt.setCreatedAt(LocalDateTime.now());
 
-                double totalAmount = 0;
+                int totalAmount = 0;
                 for (int i = 0; i < model.getRowCount(); i++) {
                     int quantity = (int) model.getValueAt(i, 6);
                     double unitPrice = (double) model.getValueAt(i, 5);
@@ -123,9 +123,9 @@ public class ImportForm extends javax.swing.JPanel {
 
                 for (int i = 0; i < model.getRowCount(); i++) {
                     int productId = (int) model.getValueAt(i, 0);
-                    double unitPrice = (double) model.getValueAt(i, 5);
+                    int unitPrice = (int) model.getValueAt(i, 5);
                     int quantity = (int) model.getValueAt(i, 6);
-                    double totalPrice = quantity * unitPrice;
+                    int totalPrice = quantity * unitPrice;
 
                     ImportItem item = new ImportItem();
                     item.setImportReceiptId(receiptId);

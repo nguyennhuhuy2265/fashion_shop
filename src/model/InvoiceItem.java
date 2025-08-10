@@ -5,13 +5,13 @@ public class InvoiceItem {
     private int invoiceId;
     private int productId;
     private int quantity;
-    private double unitPrice;
-    private double totalPrice;
+    private int unitPrice;   // đổi từ double sang int
+    private int totalPrice;  // đổi từ double sang int
 
     // Constructors
     public InvoiceItem() {}
 
-    public InvoiceItem(int invoiceId, int productId, int quantity, double unitPrice) {
+    public InvoiceItem(int invoiceId, int productId, int quantity, int unitPrice) {
         this.invoiceId = invoiceId;
         this.productId = productId;
         this.quantity = quantity;
@@ -50,24 +50,23 @@ public class InvoiceItem {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-        this.totalPrice = this.unitPrice * quantity; // Tính lại khi thay đổi
+        this.totalPrice = this.unitPrice * quantity; // tính lại khi thay đổi
     }
 
-    public double getUnitPrice() {
+    public int getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
+        this.totalPrice = this.unitPrice * this.quantity; // tính lại khi thay đổi
     }
 
-   
-
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 }

@@ -10,11 +10,12 @@ public class ImportReceiptDAO {
 
     public int insertReceipt(ImportReceipt receipt) {
         String sql = "INSERT INTO import_receipts (supplier_id, user_id, total_amount, created_at) VALUES (?, ?, ?, ?)";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setInt(1, receipt.getSupplierId());
             stmt.setInt(2, receipt.getUserId());
-            stmt.setDouble(3, receipt.getTotalAmount());
+            stmt.setInt(3, receipt.getTotalAmount()); // đổi setDouble -> setInt
             stmt.setTimestamp(4, Timestamp.valueOf(receipt.getCreatedAt()));
 
             int affectedRows = stmt.executeUpdate();
@@ -34,14 +35,16 @@ public class ImportReceiptDAO {
     public List<ImportReceipt> getAllReceipts() {
         List<ImportReceipt> list = new ArrayList<>();
         String sql = "SELECT * FROM import_receipts ORDER BY created_at DESC";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
 
             while (rs.next()) {
                 ImportReceipt r = new ImportReceipt();
                 r.setId(rs.getInt("id"));
                 r.setSupplierId(rs.getInt("supplier_id"));
                 r.setUserId(rs.getInt("user_id"));
-                r.setTotalAmount(rs.getDouble("total_amount"));
+                r.setTotalAmount(rs.getInt("total_amount")); // đổi getDouble -> getInt
                 r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                 list.add(r);
             }
@@ -53,7 +56,8 @@ public class ImportReceiptDAO {
 
     public ImportReceipt getReceiptById(int id) {
         String sql = "SELECT * FROM import_receipts WHERE id = ?";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setInt(1, id);
             try (ResultSet rs = stmt.executeQuery()) {
@@ -62,7 +66,7 @@ public class ImportReceiptDAO {
                     r.setId(rs.getInt("id"));
                     r.setSupplierId(rs.getInt("supplier_id"));
                     r.setUserId(rs.getInt("user_id"));
-                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setTotalAmount(rs.getInt("total_amount")); // đổi getDouble -> getInt
                     r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                     return r;
                 }
@@ -77,7 +81,8 @@ public class ImportReceiptDAO {
         List<ImportReceipt> list = new ArrayList<>();
         String sql = "SELECT * FROM import_receipts WHERE supplier_id = ? ORDER BY created_at DESC";
 
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, supplierId);
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -85,7 +90,7 @@ public class ImportReceiptDAO {
                     r.setId(rs.getInt("id"));
                     r.setSupplierId(rs.getInt("supplier_id"));
                     r.setUserId(rs.getInt("user_id"));
-                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setTotalAmount(rs.getInt("total_amount")); // đổi getDouble -> getInt
                     r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                     list.add(r);
                 }
@@ -101,7 +106,8 @@ public class ImportReceiptDAO {
         List<ImportReceipt> list = new ArrayList<>();
         String sql = "SELECT * FROM import_receipts WHERE CAST(id AS CHAR) LIKE ? ORDER BY created_at DESC";
 
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, "%" + keyword + "%");
             try (ResultSet rs = stmt.executeQuery()) {
                 while (rs.next()) {
@@ -109,7 +115,7 @@ public class ImportReceiptDAO {
                     r.setId(rs.getInt("id"));
                     r.setSupplierId(rs.getInt("supplier_id"));
                     r.setUserId(rs.getInt("user_id"));
-                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setTotalAmount(rs.getInt("total_amount")); // đổi getDouble -> getInt
                     r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                     list.add(r);
                 }
@@ -125,7 +131,8 @@ public class ImportReceiptDAO {
         List<ImportReceipt> list = new ArrayList<>();
         String sql = "SELECT * FROM import_receipts WHERE created_at BETWEEN ? AND ? ORDER BY created_at DESC";
 
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setTimestamp(1, Timestamp.valueOf(from));
             stmt.setTimestamp(2, Timestamp.valueOf(to));
 
@@ -135,7 +142,7 @@ public class ImportReceiptDAO {
                     r.setId(rs.getInt("id"));
                     r.setSupplierId(rs.getInt("supplier_id"));
                     r.setUserId(rs.getInt("user_id"));
-                    r.setTotalAmount(rs.getDouble("total_amount"));
+                    r.setTotalAmount(rs.getInt("total_amount")); // đổi getDouble -> getInt
                     r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                     list.add(r);
                 }
@@ -151,13 +158,15 @@ public class ImportReceiptDAO {
         List<ImportReceipt> list = new ArrayList<>();
         String sql = "SELECT * FROM import_receipts WHERE DATE(created_at) = CURDATE() ORDER BY created_at DESC";
 
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql); ResultSet rs = stmt.executeQuery()) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql);
+             ResultSet rs = stmt.executeQuery()) {
             while (rs.next()) {
                 ImportReceipt r = new ImportReceipt();
                 r.setId(rs.getInt("id"));
                 r.setSupplierId(rs.getInt("supplier_id"));
                 r.setUserId(rs.getInt("user_id"));
-                r.setTotalAmount(rs.getDouble("total_amount"));
+                r.setTotalAmount(rs.getInt("total_amount")); // đổi getDouble -> getInt
                 r.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                 list.add(r);
             }
@@ -167,7 +176,6 @@ public class ImportReceiptDAO {
 
         return list;
     }
-    // Hàm mới để lấy tổng chi theo năm
 
     public List<Object[]> getExpensesByYear(int year) {
         List<Object[]> list = new ArrayList<>();
@@ -176,13 +184,14 @@ public class ImportReceiptDAO {
                 + "WHERE YEAR(ir.created_at) = ? "
                 + "GROUP BY MONTH(ir.created_at) "
                 + "ORDER BY month";
-        try (Connection conn = DBConnection.getConnection(); PreparedStatement stmt = conn.prepareStatement(sql)) {
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setInt(1, year);
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Object[] row = new Object[2];
-                row[0] = rs.getInt("month"); // Tháng
-                row[1] = rs.getDouble("total_expense"); // Tổng chi
+                row[0] = rs.getInt("month");
+                row[1] = rs.getInt("total_expense"); // đổi getDouble -> getInt
                 list.add(row);
             }
         } catch (SQLException e) {

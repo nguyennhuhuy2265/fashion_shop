@@ -7,18 +7,18 @@ public class Invoice {
     private int id;
     private int customerId;
     private int userId;
-    private double totalAmount;
-    private double paidAmount;
-    private double changeAmount;
+    private int totalAmount;   // đổi từ double sang int
+    private int paidAmount;    // đổi từ double sang int
+    private int changeAmount;  // đổi từ double sang int
     private String note;
     private LocalDateTime createdAt;
 
-    private List<InvoiceItem> items; // Danh sách chi tiết hóa đơn (tùy dùng)
+    private List<InvoiceItem> items;
 
     // Constructors
     public Invoice() {}
 
-    public Invoice(int customerId, int userId, double totalAmount, double paidAmount, double changeAmount, String note) {
+    public Invoice(int customerId, int userId, int totalAmount, int paidAmount, int changeAmount, String note) {
         this.customerId = customerId;
         this.userId = userId;
         this.totalAmount = totalAmount;
@@ -52,27 +52,27 @@ public class Invoice {
         this.userId = userId;
     }
 
-    public double getTotalAmount() {
+    public int getTotalAmount() {
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(int totalAmount) {
         this.totalAmount = totalAmount;
     }
 
-    public double getPaidAmount() {
+    public int getPaidAmount() {
         return paidAmount;
     }
 
-    public void setPaidAmount(double paidAmount) {
+    public void setPaidAmount(int paidAmount) {
         this.paidAmount = paidAmount;
     }
 
-    public double getChangeAmount() {
+    public int getChangeAmount() {
         return changeAmount;
     }
 
-    public void setChangeAmount(double changeAmount) {
+    public void setChangeAmount(int changeAmount) {
         this.changeAmount = changeAmount;
     }
 

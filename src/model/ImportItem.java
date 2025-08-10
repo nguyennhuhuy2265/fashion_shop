@@ -1,13 +1,13 @@
-
 package model;
 
 public class ImportItem {
+
     private int id;
     private int importReceiptId;
     private int productId;
     private int quantity;
-    private double unitPrice;
-    private double totalPrice;
+    private int unitPrice;
+    private int totalPrice;
 
     public int getId() {
         return id;
@@ -41,21 +41,20 @@ public class ImportItem {
         this.quantity = quantity;
     }
 
-    public double getUnitPrice() {
+    public int getUnitPrice() {
         return unitPrice;
     }
 
-    public void setUnitPrice(double unitPrice) {
+    public void setUnitPrice(int unitPrice) {
         this.unitPrice = unitPrice;
     }
 
-    public double getTotalPrice() {
+    public int getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(double totalPrice) {
+    public void setTotalPrice(int totalPrice) {
         this.totalPrice = totalPrice;
     }
 
-   
 }

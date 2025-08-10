@@ -97,17 +97,17 @@ public class RevenueForm extends javax.swing.JPanel {
         List<Object[]> expenseData = importReceiptDAO.getExpensesByYear(selectedYear); // [month, expense]
 
         // Map dữ liệu để dễ truy xuất
-        Map<Integer, Double> revenueMap = new HashMap<>();
+        Map<Integer, Integer> revenueMap = new HashMap<>();
         for (Object[] row : revenueData) {
             int month = (Integer) row[0];
-            double revenue = (Double) row[2];
+            int revenue = (Integer) row[2];
             revenueMap.put(month, revenue);
         }
 
-        Map<Integer, Double> expenseMap = new HashMap<>();
+        Map<Integer, Integer> expenseMap = new HashMap<>();
         for (Object[] row : expenseData) {
             int month = (Integer) row[0];
-            double expense = (Double) row[1];
+            int expense = (Integer) row[1];
             expenseMap.put(month, expense);
         }
 
@@ -117,9 +117,9 @@ public class RevenueForm extends javax.swing.JPanel {
         for (int month = 1; month <= 12; month++) {
             String label = "T" + month; // Rút gọn label để biểu đồ gọn hơn
 
-            double revenue = revenueMap.getOrDefault(month, 0.0);
-            double expense = expenseMap.getOrDefault(month, 0.0);
-            double profit = revenue - expense;
+            int revenue = revenueMap.getOrDefault(month, 0);
+            int expense = expenseMap.getOrDefault(month, 0);
+            int profit = revenue - expense;
 
             dataset.addValue(revenue, "Doanh thu", label);
             dataset.addValue(expense, "Chi phí", label);

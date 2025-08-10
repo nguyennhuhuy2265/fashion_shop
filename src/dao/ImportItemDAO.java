@@ -19,8 +19,9 @@ public class ImportItemDAO {
                 stmt.setInt(1, item.getImportReceiptId());
                 stmt.setInt(2, item.getProductId());
                 stmt.setInt(3, item.getQuantity());
-                stmt.setDouble(4, item.getUnitPrice());
-                stmt.setDouble(5, item.getTotalPrice());
+                stmt.setInt(4, item.getUnitPrice());
+                stmt.setInt(5, item.getTotalPrice());
+
                 stmt.addBatch();
             }
             stmt.executeBatch();
@@ -45,8 +46,9 @@ public class ImportItemDAO {
                 item.setImportReceiptId(rs.getInt("import_receipt_id"));
                 item.setProductId(rs.getInt("product_id"));
                 item.setQuantity(rs.getInt("quantity"));
-                item.setUnitPrice(rs.getDouble("unit_price"));
-                item.setTotalPrice(rs.getDouble("total_price"));
+                item.setUnitPrice(rs.getInt("unit_price"));
+                item.setTotalPrice(rs.getInt("total_price"));
+
                 list.add(item);
             }
 

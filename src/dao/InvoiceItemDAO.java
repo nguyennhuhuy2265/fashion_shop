@@ -16,8 +16,9 @@ public class InvoiceItemDAO {
                 stmt.setInt(1, item.getInvoiceId());
                 stmt.setInt(2, item.getProductId());
                 stmt.setInt(3, item.getQuantity());
-                stmt.setDouble(4, item.getUnitPrice());
-                stmt.setDouble(5, item.getTotalPrice());
+                stmt.setInt(4, item.getUnitPrice());
+                stmt.setInt(5, item.getTotalPrice());
+
                 stmt.addBatch();
             }
             stmt.executeBatch();
@@ -41,8 +42,9 @@ public class InvoiceItemDAO {
                 item.setInvoiceId(rs.getInt("invoice_id"));
                 item.setProductId(rs.getInt("product_id"));
                 item.setQuantity(rs.getInt("quantity"));
-                item.setUnitPrice(rs.getDouble("unit_price"));
-                item.setTotalPrice(rs.getDouble("total_price"));
+                stmt.setInt(4, item.getUnitPrice());
+                stmt.setInt(5, item.getTotalPrice());
+
                 list.add(item);
             }
 

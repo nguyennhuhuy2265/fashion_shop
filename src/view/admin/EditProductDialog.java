@@ -29,8 +29,10 @@ public class EditProductDialog extends javax.swing.JDialog {
         setSize(430, 420);
 
         saveButton.addActionListener(e -> {
-            if (saveListener != null) {
-                saveListener.actionPerformed(e);
+            if (validateForm()) { // chỉ lưu khi hợp lệ
+                if (saveListener != null) {
+                    saveListener.actionPerformed(e);
+                }
             }
         });
 
@@ -85,7 +87,7 @@ public class EditProductDialog extends javax.swing.JDialog {
     public Product getProductInput() {
         Product product = new Product();
         product.setName(nameTextField.getText().trim());
-        product.setPrice(Double.parseDouble(priceTextField.getText().trim()));
+        product.setPrice(Integer.parseInt(priceTextField.getText().trim()));
         product.setQuantity(0);
         product.setSize(sizeTextField.getText().trim());
         product.setColor(colorTextField.getText().trim());
@@ -121,6 +123,63 @@ public class EditProductDialog extends javax.swing.JDialog {
         return selectedImagePath;
     }
 
+    private boolean validateForm() {
+        String name = nameTextField.getText().trim();
+        String priceText = priceTextField.getText().trim();
+        String size = sizeTextField.getText().trim();
+        String color = colorTextField.getText().trim();
+        String material = materialTextField.getText().trim();
+
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên sản phẩm", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            nameTextField.requestFocus();
+            return false;
+        }
+
+        if (priceText.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập giá bán", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            priceTextField.requestFocus();
+            return false;
+        }
+
+        try {
+            int price = Integer.parseInt(priceText);
+            if (price < 0) {
+                JOptionPane.showMessageDialog(this, "Giá bán phải >= 0", "Lỗi", JOptionPane.ERROR_MESSAGE);
+                priceTextField.requestFocus();
+                return false;
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Giá bán phải là số", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            priceTextField.requestFocus();
+            return false;
+        }
+
+        if (size.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập size", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            sizeTextField.requestFocus();
+            return false;
+        }
+
+        if (color.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập màu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            colorTextField.requestFocus();
+            return false;
+        }
+
+        if (material.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập chất liệu", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            materialTextField.requestFocus();
+            return false;
+        }
+
+        if (categoryComboBox.getSelectedItem() == null) {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn danh mục", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+
+        return true;
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

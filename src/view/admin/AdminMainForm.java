@@ -1,5 +1,6 @@
 package view.admin;
 
+import controller.LoginController;
 import java.awt.CardLayout;
 import java.awt.event.ActionListener;
 import javax.swing.JPanel;
@@ -47,9 +48,12 @@ public class AdminMainForm extends javax.swing.JFrame {
         staffButton.addActionListener(e -> layout.show(contentPanelAdmin, "staff"));
 
         logOutButton.addActionListener(e -> {
-            new LoginForm().setVisible(true);
+            LoginForm loginForm = new LoginForm();
+            LoginController loginController = new LoginController(loginForm);
+            loginForm.setVisible(true);
             dispose();
         });
+
     }
 
     @SuppressWarnings("unchecked")

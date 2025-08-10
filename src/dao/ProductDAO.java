@@ -16,7 +16,7 @@ public class ProductDAO {
                             rs.getInt("id"),
                             rs.getString("name"),
                             rs.getString("description"),
-                            rs.getDouble("price"),
+                            rs.getInt("price"), // đổi sang int
                             rs.getInt("quantity"),
                             rs.getString("size"),
                             rs.getString("color"),
@@ -44,7 +44,7 @@ public class ProductDAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
+                        rs.getInt("price"), // đổi sang int
                         rs.getInt("quantity"),
                         rs.getString("size"),
                         rs.getString("color"),
@@ -70,7 +70,7 @@ public class ProductDAO {
 
             ps.setString(1, p.getName());
             ps.setString(2, p.getDescription());
-            ps.setDouble(3, p.getPrice());
+            ps.setInt(3, p.getPrice()); // đổi sang int
             ps.setInt(4, p.getQuantity());
             ps.setString(5, p.getSize());
             ps.setString(6, p.getColor());
@@ -93,7 +93,7 @@ public class ProductDAO {
 
             ps.setString(1, p.getName());
             ps.setString(2, p.getDescription());
-            ps.setDouble(3, p.getPrice());
+            ps.setInt(3, p.getPrice()); // đổi sang int
             ps.setInt(4, p.getQuantity());
             ps.setString(5, p.getSize());
             ps.setString(6, p.getColor());
@@ -138,7 +138,7 @@ public class ProductDAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
+                        rs.getInt("price"), // đổi sang int
                         rs.getInt("quantity"),
                         rs.getString("size"),
                         rs.getString("color"),
@@ -161,7 +161,6 @@ public class ProductDAO {
         List<Product> list = new ArrayList<>();
         String sql = "SELECT p.*, c.name AS categoryName FROM products p JOIN categories c ON p.category_id = c.id WHERE p.name LIKE ?";
 
-        // Nếu lọc theo category cụ thể (không phải tất cả)
         if (categoryId != -1) {
             sql += " AND p.category_id = ?";
         }
@@ -179,7 +178,7 @@ public class ProductDAO {
                         rs.getInt("id"),
                         rs.getString("name"),
                         rs.getString("description"),
-                        rs.getDouble("price"),
+                        rs.getInt("price"), // đổi sang int
                         rs.getInt("quantity"),
                         rs.getString("size"),
                         rs.getString("color"),

@@ -83,15 +83,15 @@ public class SellForm extends javax.swing.JPanel {
             // 2. Lấy danh sách sản phẩm đang bán
             DefaultTableModel model = (DefaultTableModel) productSellTable.getModel();
             List<InvoiceItem> items = new ArrayList<>();
-            double total = 0;
+            int total = 0;
 
             for (int i = 0; i < model.getRowCount(); i++) {
                 int productId = Integer.parseInt(model.getValueAt(i, 0).toString());
                 String name = model.getValueAt(i, 1).toString();
-                double unitPrice = Double.parseDouble(model.getValueAt(i, 5).toString());
+                int unitPrice = Integer.parseInt(model.getValueAt(i, 5).toString());
                 int quantity = Integer.parseInt(model.getValueAt(i, 6).toString());
 
-                double totalPrice = unitPrice * quantity;
+                int totalPrice = unitPrice * quantity;
                 total += totalPrice;
 
                 InvoiceItem item = new InvoiceItem();
@@ -110,8 +110,8 @@ public class SellForm extends javax.swing.JPanel {
                 new CustomerDAO().updateCustomerPoints(selectedCustomer.getId(), 0);
             }
 
-            double paid = Double.parseDouble(paidAmountTextField.getText().trim());
-            double change = paid - total;
+            int paid = Integer.parseInt(paidAmountTextField.getText().trim());
+            int change = paid - total;
 
             // 4. Tạo hoá đơn
             Invoice invoice = new Invoice();
@@ -205,10 +205,10 @@ public class SellForm extends javax.swing.JPanel {
 
     private void updateTotalAmount() {
         DefaultTableModel model = (DefaultTableModel) productSellTable.getModel();
-        double total = 0;
+        int total = 0;
 
         for (int i = 0; i < model.getRowCount(); i++) {
-            double price = Double.parseDouble(model.getValueAt(i, 5).toString());
+            int price = Integer.parseInt(model.getValueAt(i, 5).toString());
             int quantity = Integer.parseInt(model.getValueAt(i, 6).toString());
             total += price * quantity;
         }
@@ -232,7 +232,7 @@ public class SellForm extends javax.swing.JPanel {
                     discountPercent = 2;
                 }
 
-                double discountAmount = total * discountPercent / 100.0;
+                int discountAmount = total * discountPercent / 100;
                 total = total - discountAmount;
             }
         }
@@ -242,10 +242,10 @@ public class SellForm extends javax.swing.JPanel {
 
     private void updateChangeAmount() {
         try {
-            double paid = Double.parseDouble(paidAmountTextField.getText().trim());
-            double total = Double.parseDouble(totalAmountTextField.getText().trim());
+            int paid = Integer.parseInt(paidAmountTextField.getText().trim());
+            int total = Integer.parseInt(totalAmountTextField.getText().trim());
 
-            double change = paid - total;
+            int change = paid - total;
             changeAmountTextField.setText(String.valueOf(change < 0 ? 0 : change));
         } catch (NumberFormatException e) {
             e.printStackTrace();

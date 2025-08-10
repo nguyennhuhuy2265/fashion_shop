@@ -67,6 +67,9 @@ public class EditSupplierDialog extends JDialog {
     }
 
     private void onSave() {
+        if (!validateForm()) {
+            return; // Nếu không hợp lệ thì dừng lại
+        }
         String name = nameField.getText().trim();
         String phone = phoneField.getText().trim();
         String email = emailField.getText().trim();
@@ -103,4 +106,47 @@ public class EditSupplierDialog extends JDialog {
     public boolean isSaved() {
         return saved;
     }
+
+    private boolean validateForm() {
+        String name = nameField.getText().trim();
+        String phone = phoneField.getText().trim();
+        String email = emailField.getText().trim();
+        String address = addressField.getText().trim();
+
+        if (name.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập tên nhà cung cấp.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            nameField.requestFocus();
+            return false;
+        }
+
+        if (phone.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Vui lòng nhập số điện thoại.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            phoneField.requestFocus();
+            return false;
+        }
+
+        // Kiểm tra số điện thoại hợp lệ (ví dụ: chỉ chứa số và 9-11 chữ số)
+        if (!phone.matches("\\d{9,11}")) {
+            JOptionPane.showMessageDialog(this, "Số điện thoại không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            phoneField.requestFocus();
+            return false;
+        }
+
+        // Email không bắt buộc, nhưng nếu có thì phải đúng định dạng
+        if (!email.isEmpty() && !email.matches("^[\\w.%+-]+@[\\w.-]+\\.[A-Za-z]{2,6}$")) {
+            JOptionPane.showMessageDialog(this, "Email không hợp lệ.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            emailField.requestFocus();
+            return false;
+        }
+
+        // Địa chỉ không bắt buộc nhưng bạn có thể kiểm tra độ dài nếu cần
+        if (!address.isEmpty() && address.length() < 5) {
+            JOptionPane.showMessageDialog(this, "Địa chỉ quá ngắn.", "Lỗi", JOptionPane.ERROR_MESSAGE);
+            addressField.requestFocus();
+            return false;
+        }
+
+        return true;
+    }
+
 }

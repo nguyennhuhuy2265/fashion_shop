@@ -7,7 +7,7 @@ public class ImportReceipt {
     private int id;
     private int supplierId;
     private int userId;
-    private double totalAmount;
+    private int totalAmount; // đổi double -> int
     private String note;
     private LocalDateTime createdAt;
 
@@ -35,11 +35,11 @@ public class ImportReceipt {
         this.userId = userId;
     }
 
-    public double getTotalAmount() {
+    public int getTotalAmount() { // đổi double -> int
         return totalAmount;
     }
 
-    public void setTotalAmount(double totalAmount) {
+    public void setTotalAmount(int totalAmount) { // đổi double -> int
         this.totalAmount = totalAmount;
     }
 
@@ -58,5 +58,4 @@ public class ImportReceipt {
     public void setCreatedAt(LocalDateTime createdAt) {
         this.createdAt = createdAt;
     }
-
 }

@@ -28,6 +28,15 @@ public class StaffForm extends javax.swing.JPanel {
         });
 
         editButton.addActionListener(e -> {
+            String fullname = fullnameTextField.getText().trim();
+            String username = usernameTextField.getText().trim();
+            String password = passwordTextField.getText().trim();
+
+            String error = validateUserInput(fullname, username, password);
+            if (error != null) {
+                JOptionPane.showMessageDialog(this, error);
+                return;
+            }
             if (isAddingNew) {
                 // Thêm mới
                 User newUser = getUserFromInput();
@@ -189,6 +198,27 @@ public class StaffForm extends javax.swing.JPanel {
         usernameTextField.setText("");
         passwordTextField.setText("");
         isActiveComboBox.setSelectedIndex(0);
+    }
+
+    private String validateUserInput(String fullname, String username, String password) {
+        if (fullname == null || fullname.trim().isEmpty()) {
+            return "Tên nhân viên không được để trống.";
+        }
+        if (username == null || username.trim().isEmpty()) {
+            return "Tài khoản không được để trống.";
+        }
+        // Username có thể có quy tắc riêng, ví dụ chỉ cho phép chữ và số, từ 4 đến 20 ký tự
+        if (!username.matches("[a-zA-Z0-9]{4,20}")) {
+            return "Tài khoản chỉ chứa chữ và số, dài từ 4 đến 20 ký tự.";
+        }
+        if (password == null || password.trim().isEmpty()) {
+            return "Mật khẩu không được để trống.";
+        }
+        // Ví dụ quy tắc mật khẩu: tối thiểu 6 ký tự
+        if (password.length() < 6) {
+            return "Mật khẩu phải có ít nhất 6 ký tự.";
+        }
+        return null; // hợp lệ
     }
 
     @SuppressWarnings("unchecked")

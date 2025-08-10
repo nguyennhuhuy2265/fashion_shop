@@ -15,9 +15,9 @@ public class InvoiceDAO {
 
             stmt.setInt(1, invoice.getCustomerId());
             stmt.setInt(2, invoice.getUserId());
-            stmt.setDouble(3, invoice.getTotalAmount());
-            stmt.setDouble(4, invoice.getPaidAmount());
-            stmt.setDouble(5, invoice.getChangeAmount());
+            stmt.setInt(3, invoice.getTotalAmount());  // int
+            stmt.setInt(4, invoice.getPaidAmount());   // int
+            stmt.setInt(5, invoice.getChangeAmount()); // int
             stmt.setString(6, invoice.getNote());
             stmt.setTimestamp(7, Timestamp.valueOf(invoice.getCreatedAt() != null ? invoice.getCreatedAt() : LocalDateTime.now()));
 
@@ -49,9 +49,9 @@ public class InvoiceDAO {
                 invoice.setId(rs.getInt("id"));
                 invoice.setCustomerId(rs.getInt("customer_id"));
                 invoice.setUserId(rs.getInt("user_id"));
-                invoice.setTotalAmount(rs.getDouble("total_amount"));
-                invoice.setPaidAmount(rs.getDouble("paid_amount"));
-                invoice.setChangeAmount(rs.getDouble("change_amount"));
+                invoice.setTotalAmount(rs.getInt("total_amount"));
+                invoice.setPaidAmount(rs.getInt("paid_amount"));
+                invoice.setChangeAmount(rs.getInt("change_amount"));
                 invoice.setNote(rs.getString("note"));
                 invoice.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
 
@@ -75,9 +75,9 @@ public class InvoiceDAO {
                 invoice.setId(rs.getInt("id"));
                 invoice.setCustomerId(rs.getInt("customer_id"));
                 invoice.setUserId(rs.getInt("user_id"));
-                invoice.setTotalAmount(rs.getDouble("total_amount"));
-                invoice.setPaidAmount(rs.getDouble("paid_amount"));
-                invoice.setChangeAmount(rs.getDouble("change_amount"));
+                invoice.setTotalAmount(rs.getInt("total_amount"));
+                invoice.setPaidAmount(rs.getInt("paid_amount"));
+                invoice.setChangeAmount(rs.getInt("change_amount"));
                 invoice.setNote(rs.getString("note"));
                 invoice.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
                 return invoice;
@@ -124,15 +124,14 @@ public class InvoiceDAO {
         return list;
     }
 
-// Hàm phụ để tái sử dụng
     private Invoice extractInvoiceFromResultSet(ResultSet rs) throws SQLException {
         Invoice invoice = new Invoice();
         invoice.setId(rs.getInt("id"));
         invoice.setCustomerId(rs.getInt("customer_id"));
         invoice.setUserId(rs.getInt("user_id"));
-        invoice.setTotalAmount(rs.getDouble("total_amount"));
-        invoice.setPaidAmount(rs.getDouble("paid_amount"));
-        invoice.setChangeAmount(rs.getDouble("change_amount"));
+        invoice.setTotalAmount(rs.getInt("total_amount"));
+        invoice.setPaidAmount(rs.getInt("paid_amount"));
+        invoice.setChangeAmount(rs.getInt("change_amount"));
         invoice.setNote(rs.getString("note"));
         invoice.setCreatedAt(rs.getTimestamp("created_at").toLocalDateTime());
         return invoice;
@@ -158,7 +157,6 @@ public class InvoiceDAO {
 
         return list;
     }
-// Hàm mới để lấy dữ liệu thống kê doanh thu theo năm
 
     public List<Object[]> getRevenueByYear(int year) {
         List<Object[]> list = new ArrayList<>();
@@ -173,9 +171,9 @@ public class InvoiceDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Object[] row = new Object[3];
-                row[0] = rs.getInt("month"); // Tháng
-                row[1] = rs.getInt("total_quantity"); // Số lượng sản phẩm
-                row[2] = rs.getDouble("total_revenue"); // Tổng thu
+                row[0] = rs.getInt("month");
+                row[1] = rs.getInt("total_quantity");
+                row[2] = rs.getInt("total_revenue"); // int thay vì double
                 list.add(row);
             }
         } catch (SQLException e) {
