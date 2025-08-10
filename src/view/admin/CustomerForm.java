@@ -102,11 +102,16 @@ public class CustomerForm extends javax.swing.JPanel {
         deleteButton.addActionListener(e -> {
             if (selectedCustomer != null) {
                 int confirm = JOptionPane.showConfirmDialog(this, "Xóa khách hàng?");
-                if (confirm == JOptionPane.YES_OPTION) {
-                    if (customerDAO.deleteCustomer(selectedCustomer.getId())) {
+                if (confirm == JOptionPane.YES_NO_OPTION) {
+                    boolean deleted = customerDAO.deleteCustomer(selectedCustomer.getId());
+                    if (deleted) {
                         JOptionPane.showMessageDialog(this, "Đã xóa");
                         loadCustomerTable();
                         clearFields();
+                    } else {
+                        JOptionPane.showMessageDialog(this,
+                                "Không xóa được khách hàng vì đã có thông tin hóa đơn trên hệ thống",
+                                "Lỗi", JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }
@@ -128,13 +133,12 @@ public class CustomerForm extends javax.swing.JPanel {
     }
 
     private void clearFields() {
-    nameTextField.setText("");
-    phoneTextField.setText("");
-    pointLabel.setText("0");
-    selectedCustomer = null;
-    updateButton.setText("Cập nhật");
-}
-
+        nameTextField.setText("");
+        phoneTextField.setText("");
+        pointLabel.setText("0");
+        selectedCustomer = null;
+        updateButton.setText("Cập nhật");
+    }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents

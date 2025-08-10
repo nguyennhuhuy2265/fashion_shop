@@ -41,7 +41,7 @@ public class ProductController {
                 JOptionPane.showMessageDialog(null, "Xóa sản phẩm thành công.");
                 loadProductTable(table);
             } else {
-                JOptionPane.showMessageDialog(null, "Xóa sản phẩm thất bại.");
+                JOptionPane.showMessageDialog(null, "Sản phẩm đã đưa vào kinh doanh không thể xóa.");
             }
         }
     }
