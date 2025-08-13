@@ -53,7 +53,7 @@ public class ProductController {
             model.addRow(new Object[]{
                 p.getId(),
                 p.getName(),
-                p.getPrice(),
+                FormatUtil.formatCurrency(p.getPrice()),
                 p.getSize(),
                 p.getColor(),
                 p.getMaterial(),

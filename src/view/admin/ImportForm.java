@@ -246,7 +246,7 @@ private void updateTotalPrice() {
 
             },
             new String [] {
-                "Mã sản phẩm", "Tên sản phẩm", "Giá bán", "Size", "Màu sắc", "Chất liệu", "Số lượng tồn kho"
+                "Mã sản phẩm", "Tên sản phẩm", "Size", "Màu sắc", "Chất liệu", "Giá bán", "Số lượng tồn kho"
             }
         ));
         jScrollPane1.setViewportView(productTable);
@@ -312,7 +312,7 @@ private void updateTotalPrice() {
                                 .addComponent(saveButton)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(deleteButton)))
-                        .addGap(0, 494, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1)
@@ -330,7 +330,7 @@ private void updateTotalPrice() {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(totalPriceTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE))
-                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 257, Short.MAX_VALUE)
+                                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                     .addComponent(jLabel6)

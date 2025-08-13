@@ -1,5 +1,6 @@
 package view.admin;
 
+import controller.FormatUtil;
 import controller.ProductController;
 import dao.CategoryDAO;
 import java.awt.event.ItemEvent;
@@ -23,7 +24,24 @@ public class ProductForm extends javax.swing.JPanel {
     // Load dữ liệu ban đầu
     private void initData() {
         productController.loadProductTable(productTable);
+        // Format cột giá (cột số 2 - đếm từ 0)
+        for (int i = 0; i < productTable.getRowCount(); i++) {
+            Object value = productTable.getValueAt(i, 2); // Cột Giá
+            if (value != null) {
+                try {
+                    int price = Integer.parseInt(value.toString());
+                    productTable.setValueAt(FormatUtil.formatCurrency(price), i, 2);
+                } catch (NumberFormatException e) {
+                    // Bỏ qua nếu không phải số
+                }
+            }
+        }
         loadCategoryComboBox();
+    }
+    // Hàm format tiền tệ
+
+    private String formatCurrency(int amount) {
+        return new java.text.DecimalFormat("#,###").format(amount);
     }
 
     // Load danh mục vào ComboBox
